@@ -1,0 +1,4 @@
+a	Arfa	pk
+b	Brendon	us
+c	Chiyo	ja
+d	Dikembe	ug
