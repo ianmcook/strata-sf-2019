@@ -2,4 +2,4 @@ office_id	city	state_province	country
 a	Istanbul	Istanbul	tr
 b	Chicago	Illinois	us
 c	Rosario	Santa Fe	ar
-d	Singapore	\N	sg
+d	Singapore		sg
