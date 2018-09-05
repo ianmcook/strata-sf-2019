@@ -146,6 +146,9 @@ print(eval_result)
 
 # Use the trained model to generate predictions
 # on unlabeled images
+
+# Some of these images are of pieces from other
+# chess sets (not from set A)
 img_dir = img_root + '/unknown/'
 img_paths = [img_dir + d for d in os.listdir(img_dir)]
 pred_x = img_paths
