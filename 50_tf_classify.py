@@ -100,7 +100,7 @@ my_feature_columns = [
 # module
 
 # [`DNNClassifier`](https://www.tensorflow.org/api_docs/python/tf/estimator/DNNClassifier)
-# is a dense neural network (DNN) model that can perform
+# is a dense neural network model that can perform
 # multi-class classification. It builds feed-forward
 # neural networks with all layers fully connected.
 
