@@ -93,7 +93,7 @@ my_feature_columns = [
 # module
 
 # [`DNNClassifier`](https://www.tensorflow.org/api_docs/python/tf/estimator/DNNClassifier)
-# is a deep neural network model that can perform
+# is a deep neural network (DNN) model that can perform
 # multi-class classification
 classifier = tf.estimator.DNNClassifier(
     feature_columns = my_feature_columns,
