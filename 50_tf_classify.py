@@ -27,7 +27,7 @@
 import pandas as pd
 import tensorflow as tf
 
-# Load the data representing one model of chess set
+# Load the data representing one brand of chess set
 chess = pd.read_csv('data/chess/one_chess_set.csv')
 
 # View the data
@@ -88,7 +88,7 @@ def test_input_fn():
 # module
 
 # The feature columns in this dataset are all numeric
-# columns representing dimensions of the chess pieces
+# columns representing measurements of the chess pieces
 my_feature_columns = [
   tf.feature_column.numeric_column('base_diameter'),
   tf.feature_column.numeric_column('height'),
@@ -186,3 +186,4 @@ for (prediction, expected) in zip(predictions, expected_y):
       expected
     )
   )
+
