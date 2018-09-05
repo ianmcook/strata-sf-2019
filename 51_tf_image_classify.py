@@ -190,6 +190,34 @@ for (prediction, image) in zip(predictions, pred_x):
     display(Image(image))
 
 
+# ## Exercises
+
+# 1. This code trains the model using only images of
+#    pieces from chess set A. The resulting trained 
+#    model is poor at generalizing to images of pieces
+#    from other chess sets. Modify the code in the
+#    **Preparation** section to train the model using
+#    the images of pieces from all four sets (A, B, 
+#    C, and D). How does this affect the accuracy
+#    of the model on the test (evaluation) set?
+#
+# 2. In the **TensorFlow setup** section and the
+#    **Specifying the model** section, modify 
+#    `BATCH_SIZE`, `TRAIN_STEPS`, the number of
+#    hidden layers, and the number of nodes in the
+#    hidden layers to try to improve the accuracy of
+#    the model.
+#
+# 3. After making these changes, does the model do 
+#    a better job of generating predictions on the
+#    unlabeled images?
+#
+# 4. Modify the code in the **Making predictions**
+#    section to use images from the `weird` directory
+#    instead of the `unknown` directory. How well
+#    does the model predict on these images?
+
+
 # ## Next steps
 
 # Dense neural networks (with all layers fully connected)
