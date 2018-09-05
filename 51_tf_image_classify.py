@@ -115,7 +115,7 @@ my_feature_columns = [
 # converge to a local minimum.
 classifier = tf.estimator.DNNClassifier(
     feature_columns = my_feature_columns,
-    hidden_units = [2048, 256, 32],
+    hidden_units = [1024, 128],
     optimizer = tf.train.AdamOptimizer(
       learning_rate = 0.0001
     ),
