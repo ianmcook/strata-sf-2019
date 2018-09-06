@@ -225,9 +225,11 @@ for (prediction, image) in zip(predictions, pred_x):
 # in relatively simple cases like this one. Predictions 
 # are sensitive to the size and position of the objects 
 # in the image; they cannot robustly generalize.
+
 # Accuracy can be improved by increasing the number of
-# hidden layers and nodes and by using larger amounts
-# more diverse training data, but this is inefficient.
+# hidden layers and nodes, increasing the number of
+# training steps, and using larger amounts of more
+# diverse training data, but this is inefficient.
 
 # Convolutional neural networks (CNNs) provide a solution.
 # In addition to dense (fully connected) layers, they use
