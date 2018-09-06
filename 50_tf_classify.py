@@ -27,7 +27,7 @@
 import pandas as pd
 import tensorflow as tf
 
-# Load the data representing one brand of chess set
+# Load data representing one brand of chess set ("set A")
 chess = pd.read_csv('data/chess/one_chess_set.csv')
 
 # View the data
@@ -138,9 +138,9 @@ print(eval_result)
 
 # ## Making predictions
 
-# See what predictions the model generates for
-# six unlabeled chess pieces whose features are given
-# in this dictionary:
+# See what predictions the model generates for six
+# unlabeled chess pieces from "set A" whose features
+# are given in this dictionary:
 predict_x = {
   'base_diameter': [37.4, 35.9, 32.1, 31, 32.7, 27.3],
   'height': [95.4, 75.6, 46.3, 65.2, 58.1, 45.7],
@@ -186,4 +186,3 @@ for (prediction, expected) in zip(predictions, expected_y):
       expected
     )
   )
-
