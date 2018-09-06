@@ -228,3 +228,20 @@ for (prediction, expected) in zip(predictions, expected_y):
 #    hidden layers, and the number of nodes in the
 #    hidden layers to try to improve the accuracy of
 #    the model.
+
+
+# ## Next steps
+
+# Using only the three measurements of each chess piece
+# (base diameter, height, and weight) as the features, 
+# the model cannot accurately classify pieces drawn
+# from multiple different brands of chess sets with
+# different dimensions and weights.
+
+# But in a real-world application, a model like this
+# might need to classify pieces without knowledge of 
+# which brand of chess set they came from.
+
+# An algorithm that could use _images_ of the chess
+# pieces as a feature might be able to more accurately 
+# classify pieces drawn from different chess sets.
