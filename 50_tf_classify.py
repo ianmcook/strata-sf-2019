@@ -186,3 +186,45 @@ for (prediction, expected) in zip(predictions, expected_y):
       expected
     )
   )
+
+
+# ## Exercises
+
+# 1. This code trains the model using measurements of
+#    pieces from just one brand of chess set ("set A").
+#    In the **Preparation** section, modify the code
+#    to load data with measurements from four different
+#    brands of chess sets (A, B, C, and D). This data
+#    is in the file `four_chess_sets.csv`. How does 
+#    this affect the accuracy of the model on the test 
+#    (evaluation) set?
+#
+# 2. In the **Specifying the model** section, modify
+#    the list of feature columns to add the column that
+#    specifies which brand of set each piece is from.
+#    Use the following code to do this:
+#    ```python
+#    tf.feature_column.indicator_column(
+#      tf.feature_column.categorical_column_with_vocabulary_list(
+#       key = 'set',
+#       vocabulary_list=['A', 'B', 'C', 'D']
+#      )
+#    )
+#    ```
+#    Does the model perform better when it knows which
+#    set each piece is from?
+#
+#    After you make this change, the code in the 
+#    **Making predictions** section will fail unless
+#    you also add the `set` feature to the `predict_x`
+#    dictionary:
+#    ```python
+#    'set': ['A', 'A', 'A', 'A', 'A', 'A'],
+#    ```
+#
+# 3. In the **TensorFlow setup** section and the
+#    **Specifying the model** section, modify 
+#    `BATCH_SIZE`, `TRAIN_STEPS`, the number of
+#    hidden layers, and the number of nodes in the
+#    hidden layers to try to improve the accuracy of
+#    the model.
