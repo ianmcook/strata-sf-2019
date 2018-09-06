@@ -234,14 +234,16 @@ for (prediction, expected) in zip(predictions, expected_y):
 
 # Using only the three measurements of each chess piece
 # (base diameter, height, and weight) as the features, 
-# the model cannot accurately classify pieces drawn
-# from multiple different brands of chess sets with
-# different dimensions and weights.
+# the model cannot as accurately and efficiently classify
+# pieces drawn from multiple different brands of chess 
+# sets with different dimensions and weights.
 
-# But in a real-world application, a model like this
-# might need to classify pieces without knowledge of 
-# which brand of chess set they came from.
+# In a real-world application, a model like this might
+# need to classify pieces without knowledge of which
+# brand of chess set they came from. Also, collecting
+# measurements like these for every piece might be 
+# impractical in a real-world application.
 
 # An algorithm that could use _images_ of the chess
-# pieces as a feature might be able to more accurately 
-# classify pieces drawn from different chess sets.
+# pieces as the feature might be a more practical choice
+# for classifying pieces drawn from different chess sets.
