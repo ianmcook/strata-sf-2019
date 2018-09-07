@@ -25,7 +25,7 @@
 
 # ## Generate predicted labels for the test set
 
-predictions = classifier.predict(
+predictions = model.predict(
     input_fn = test_input_fn
 )
 test_pred = []

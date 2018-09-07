@@ -104,14 +104,14 @@ my_feature_columns = [
 # multi-class classification. It builds feed-forward
 # neural networks with all layers fully connected.
 
-classifier = tf.estimator.DNNClassifier(
+model = tf.estimator.DNNClassifier(
     feature_columns = my_feature_columns,
     hidden_units = [20, 20], # 2 hidden layers with 10 nodes each
     label_vocabulary = chess_pieces,
     n_classes = 6 # len(chess_pieces)
 )
 
-# The resulting estimator object (named `classifier`)
+# The resulting estimator object (named `model`)
 # has methods that can be called to:
 # - Train the model
 # - Evaluate the trained model
@@ -121,14 +121,14 @@ classifier = tf.estimator.DNNClassifier(
 # ## Training and evaluating the model
 
 # Call the `train` method to train the model
-classifier.train(
+model.train(
   input_fn = train_input_fn,
   steps = TRAIN_STEPS
 )
 
 # Call the `evaluate` method to evaluate (test) the
 # trained model
-eval_result = classifier.evaluate(
+eval_result = model.evaluate(
   input_fn = test_input_fn
 )
 
@@ -165,7 +165,7 @@ def predict_input_fn():
 
 # Call the `predict` method to use the trained model to
 # make predictions
-predictions = classifier.predict(
+predictions = model.predict(
     input_fn = predict_input_fn
 )
 

@@ -127,14 +127,14 @@ classifier = tf.estimator.DNNClassifier(
 # ## Training and evaluating the model
 
 # Call the `train` method to train the model
-classifier.train(
+model.train(
   input_fn = train_input_fn,
   steps = TRAIN_STEPS
 )
 
 # Call the `evaluate` method to evaluate (test) the
 # trained model
-eval_result = classifier.evaluate(
+eval_result = model.evaluate(
   input_fn = test_input_fn
 )
 
@@ -171,7 +171,7 @@ def predict_input_fn():
 
 # Call the `predict` method to use the trained model to
 # make predictions
-predictions = classifier.predict(
+predictions = model.predict(
     input_fn = predict_input_fn
 )
 
