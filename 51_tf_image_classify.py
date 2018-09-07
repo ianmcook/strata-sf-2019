@@ -113,7 +113,7 @@ my_feature_columns = [
 # The optimizer's learning rate is also specified, because
 # the default value of 0.001 caused the algorithm to
 # converge to a local minimum.
-classifier = tf.estimator.DNNClassifier(
+model = tf.estimator.DNNClassifier(
     feature_columns=my_feature_columns,
     hidden_units=[1024, 128],
     optimizer=tf.train.AdamOptimizer(
