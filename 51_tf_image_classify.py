@@ -23,9 +23,8 @@
 # ## Preparation
 
 # Import the required modules
-import tensorflow as tf
-import pandas as pd
 import os, random, math
+import tensorflow as tf
 from IPython.display import Image, display
 
 # Specify the unique labels (names of the chess pieces)
