@@ -114,13 +114,13 @@ my_feature_columns = [
 # the default value of 0.001 caused the algorithm to
 # converge to a local minimum.
 classifier = tf.estimator.DNNClassifier(
-    feature_columns = my_feature_columns,
-    hidden_units = [1024, 128],
-    optimizer = tf.train.AdamOptimizer(
-      learning_rate = 0.0001
+    feature_columns=my_feature_columns,
+    hidden_units=[1024, 128],
+    optimizer=tf.train.AdamOptimizer(
+      learning_rate=0.0001
     ),
-    label_vocabulary = chess_pieces,
-    n_classes = 6
+    label_vocabulary=chess_pieces,
+    n_classes=6
 )
 
 
@@ -128,14 +128,14 @@ classifier = tf.estimator.DNNClassifier(
 
 # Call the `train` method to train the model
 model.train(
-  input_fn = train_input_fn,
-  steps = TRAIN_STEPS
+  input_fn=train_input_fn,
+  steps=TRAIN_STEPS
 )
 
 # Call the `evaluate` method to evaluate (test) the
 # trained model
 eval_result = model.evaluate(
-  input_fn = test_input_fn
+  input_fn=test_input_fn
 )
 
 # Print the result to examine the accuracy
@@ -172,7 +172,7 @@ def predict_input_fn():
 # Call the `predict` method to use the trained model to
 # make predictions
 predictions = model.predict(
-    input_fn = predict_input_fn
+    input_fn=predict_input_fn
 )
 
 # Print the predictions and display the images

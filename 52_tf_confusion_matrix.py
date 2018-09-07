@@ -26,7 +26,7 @@
 # ## Generate predicted labels for the test set
 
 predictions = model.predict(
-    input_fn = test_input_fn
+    input_fn=test_input_fn
 )
 test_pred = []
 for prediction in predictions:
@@ -47,9 +47,9 @@ from sklearn import metrics
 
 # Compute the confusion matrix
 confusion = metrics.confusion_matrix(
-  y_true = test_y,
-  y_pred = test_pred,
-  labels = chess_pieces
+  y_true=test_y,
+  y_pred=test_pred,
+  labels=chess_pieces
 )
 
 

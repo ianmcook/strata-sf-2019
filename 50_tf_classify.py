@@ -38,7 +38,7 @@ chess_pieces = ['King', 'Queen', 'Rook', 'Bishop', 'Knight', 'Pawn']
 
 # Split the data into an 80% training set and a 20%
 # evaluation (test) set
-train = chess.sample(frac = 0.8, random_state = 42)
+train = chess.sample(frac=0.8, random_state=42)
 test = chess.drop(train.index)
 
 # Separate the features (x) and labels (y) in the 
@@ -105,10 +105,10 @@ my_feature_columns = [
 # neural networks with all layers fully connected.
 
 model = tf.estimator.DNNClassifier(
-    feature_columns = my_feature_columns,
-    hidden_units = [20, 20], # 2 hidden layers with 10 nodes each
-    label_vocabulary = chess_pieces,
-    n_classes = 6 # len(chess_pieces)
+    feature_columns=my_feature_columns,
+    hidden_units=[20, 20], # 2 hidden layers with 10 nodes each
+    label_vocabulary=chess_pieces,
+    n_classes=6 # len(chess_pieces)
 )
 
 # The resulting estimator object (named `model`)
@@ -122,14 +122,14 @@ model = tf.estimator.DNNClassifier(
 
 # Call the `train` method to train the model
 model.train(
-  input_fn = train_input_fn,
-  steps = TRAIN_STEPS
+  input_fn=train_input_fn,
+  steps=TRAIN_STEPS
 )
 
 # Call the `evaluate` method to evaluate (test) the
 # trained model
 eval_result = model.evaluate(
-  input_fn = test_input_fn
+  input_fn=test_input_fn
 )
 
 # Print the result to examine the accuracy
@@ -166,7 +166,7 @@ def predict_input_fn():
 # Call the `predict` method to use the trained model to
 # make predictions
 predictions = model.predict(
-    input_fn = predict_input_fn
+    input_fn=predict_input_fn
 )
 
 # The `predict` method returns a generator that you can
@@ -206,7 +206,7 @@ for (prediction, expected) in zip(predictions, expected_y):
 #    ```python
 #    tf.feature_column.indicator_column(
 #      tf.feature_column.categorical_column_with_vocabulary_list(
-#       key = 'set',
+#       key='set',
 #       vocabulary_list=['A', 'B', 'C', 'D']
 #      )
 #    )
