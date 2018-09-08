@@ -201,3 +201,63 @@ model3.score(test_x, test_y)
 
 # The model now appears to be neither overfitting nor
 # underfitting.
+
+
+# ## Visualizing overfitting and underfitting
+
+# Compute lines representing the predictions of the
+# overfitted model, the underfitted model, and the
+# "just right" model
+axis_x = np.arange(26.9, 37.8, 0.01)[:, np.newaxis]
+pred1 = model.predict(axis_x)
+pred2 = model2.predict(axis_x)
+pred3 = model3.predict(axis_x)
+
+# Plot the overfitted model overlaid on the training
+# data
+def plot_overfit_train():
+  plt.figure()
+  plt.scatter(train_x, train_y, s=20, edgecolor="black",
+              c="darkorange", label="training data")
+  plt.plot(axis_x, pred1, color="cornflowerblue",
+           label="max_leaf_nodes=Inf", linewidth=2)
+  plt.xlabel("feature")
+  plt.ylabel("target")
+  plt.title("Decision Tree Regression")
+  plt.legend()
+  plt.show()
+  
+plot_overfit_train()
+
+# Plot the overfitted model overlaid on the test data
+def plot_overfit_test():
+  plt.figure()
+  plt.scatter(test_x, test_y, s=20, edgecolor="black",
+              c="darkorange", label="test data")
+  plt.plot(axis_x, pred1, color="cornflowerblue",
+           label="max_leaf_nodes=Inf", linewidth=2)
+  plt.xlabel("feature")
+  plt.ylabel("target")
+  plt.title("Decision Tree Regression")
+  plt.legend()
+  plt.show()
+
+plot_overfit_test()
+
+# Plot the underfitted model and the "just right"
+# model overlaid on the test data
+def plot_underfit_and_good_fit():
+  plt.figure()
+  plt.scatter(test_x, test_y, s=20, edgecolor="black",
+              c="darkorange", label="test data")
+  plt.plot(axis_x, pred2, color="yellowgreen", 
+           label="max_leaf_nodes=2", linewidth=2)
+  plt.plot(axis_x, pred3, color="darkorchid", 
+           label="max_leaf_nodes=5", linewidth=2)
+  plt.xlabel("feature")
+  plt.ylabel("target")
+  plt.title("Decision Tree Regression")
+  plt.legend()
+  plt.show()
+
+plot_underfit_and_good_fit()
