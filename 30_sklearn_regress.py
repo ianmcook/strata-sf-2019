@@ -12,15 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # scikit-learn linear regression model
+# # scikit-learn regression models
 
-# This example demonstrates a simple linear regression
-# modeling task using the
+# This example demonstrates a simple regression modeling
+# task, first using the using the
 # [`LinearRegression`](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)
 # class in the 
 # [`sklearn.linear_model`](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model)
+# module, then using the 
+# [`DecisionTreeRegressor`](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html)
+# class in the 
+# [`sklearn.tree`](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.tree)
 # module.
-
 
 # ## Preparation
 
@@ -104,3 +107,57 @@ predictions = model.predict(new_data)
 
 # Print the predictions
 print(predictions)
+
+
+# ## Other available regression models
+
+# The scikit-learn user guide provides a list of the
+# [supervised learning methods](http://scikit-learn.org/stable/supervised_learning.html)
+# that are available in scikit-learn. This includes
+# methods for regression tasks, classification tasks,
+# and other types of tasks.
+
+# Let's try applying the 
+# [`DecisionTreeRegressor`](http://scikit-learn.org/stable/modules/tree.html#regression)
+# class to the same regression problem above.
+
+
+# ## Preparation
+
+# Import the required module
+from sklearn.tree import DecisionTreeRegressor
+
+
+# ## scikit-learn setup
+
+# Create the model object ("estimator")
+# by calling the `DecisionTreeRegressor` function
+model = DecisionTreeRegressor()
+
+
+# ## Training the model
+
+# Call the `fit` method to train the model
+model.fit(train_x, train_y)
+
+
+# ## Evaluating the trained model
+
+# Call the `score` method to compute the R-squared
+# on the test set
+model.score(test_x, test_y)
+
+# This tree model is performing worse than the simple
+# linear regression. Let's investigate whether it
+# is overfitting the training data.
+
+# Call the `score` method to compute the R-squared
+# on the training set
+model.score(train_x, train_y)
+
+# The model's R-squared on the training set is much
+# higher than its R-squared on the test set. This is
+# an indication that the model is overfitting.
+
+# Let's see if we can stop the model from overfitting
+# by adjusting hyperparameters.
