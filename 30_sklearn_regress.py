@@ -57,16 +57,28 @@ test_y = test.weight
 model = LinearRegression()
 
 
-# ## Training and evaluating the model
+# ## Training the model
 
 # Call the `fit` method to train the model
 model.fit(train_x, train_y)
 
+
+# ## Evaluating the trained model
+
 # Call the `score` method to compute the coefficient of
 # of determination (R-squared) on the test set. This is 
-# the proportion of the variation in the features that
+# the proportion of the variation in the target that
 # can be explained by the model
 model.score(test_x, test_y)
+
+# Call the `predict` method to use the trained model to
+# make predictions on the test set
+test_pred = model.predict(test_x)
+
+# Display a scatterplot of the actual feature values (x)
+# and target (y) values in the test set, with the 
+# regression line overlaid
+plt.scatter(test_x, test_y); plt.plot(test_x, test_pred)
 
 
 # ## Interpreting the model
@@ -79,16 +91,16 @@ model.coef_
 model.intercept_
 
 
-# ## Making predictions
+# ## Making predictions on new data
+
+# See what predictions the trained model generates for
+# five new rows of data (feature only)
+d = {'base_diameter': [27.3, 32.7, 30.1, 32,1, 35.9, 37.4]}
+new_data = pd.DataFrame(data=d)
 
 # Call the `predict` method to use the trained model to
-# make predictions (on the test set)
-predictions = model.predict(test_x)
+# make predictions on this new data
+predictions = model.predict(new_data)
 
-
-# ## Visualizing the model
-
-# Display a scatterplot of the actual feature values (x)
-# and target (y) values in the test set, with the 
-# regression line overlaid
-plt.scatter(test_x, test_y); plt.plot(test_x, predictions)
+# Print the predictions
+print(predictions)
