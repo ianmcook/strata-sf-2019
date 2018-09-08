@@ -162,3 +162,42 @@ model.score(train_x, train_y)
 
 # Let's see if we can stop the model from overfitting
 # by adjusting hyperparameters.
+
+
+# ## Hyperparameter tuning
+
+# One of the hyperparmeters for a regression tree
+# is the maximum number of leaf nodes. This controls 
+# how complex the fitted model can grow to be. By
+# default, this hyperparameter is unconstrained, so
+# the trees in the model can grow arbitrarily complex.
+
+# The maximum number of leaf nodes can be specified
+# using the `max_leaf_nodes` parameter to the 
+# `DecisionTreeRegressor` function.
+
+# Try setting `max_leaf_nodes` to a very low number
+model2 = DecisionTreeRegressor(max_leaf_nodes=2)
+
+# Re-fit the model, and calculate the R-squared on both 
+# the training set and test set
+model2.fit(train_x, train_y)
+model2.score(train_x, train_y)
+model2.score(test_x, test_y)
+
+# The model's R-squared on both the training set and
+# the test set are much lower than before. This is
+# an indication that the model is now underfitting.
+
+# Try setting `max_leaf_nodes` to a slightly larger
+# number
+model3 = DecisionTreeRegressor(max_leaf_nodes=5)
+
+# Re-fit the model, and calculate the R-squared on both 
+# the training set and test set
+model3.fit(train_x, train_y)
+model3.score(train_x, train_y)
+model3.score(test_x, test_y)
+
+# The model now appears to be neither overfitting nor
+# underfitting.
