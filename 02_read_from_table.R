@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # Read data from a Hive table into an R DataFrame
+# # Read data from a Hive table into an R data frame
 
 # ## Using odbc and DBI
 
