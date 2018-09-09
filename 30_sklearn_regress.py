@@ -99,7 +99,7 @@ model.intercept_
 # ## Making predictions on new data
 
 # See what predictions the trained model generates for
-# five new rows of data (feature only)
+# six new rows of data (feature only)
 d = {'base_diameter': [27.3, 32.7, 30.1, 32.1, 35.9, 37.4]}
 new_data = pd.DataFrame(data=d)
 
