@@ -14,7 +14,7 @@
 
 # # Read data from a delimited text file into a pandas DataFrame
 
-# Load packages
+# Load modules
 import numpy as np
 import pandas as pd
 
