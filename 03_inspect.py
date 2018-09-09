@@ -22,9 +22,8 @@ games
 
 
 # How many rows and columns does the data have?
-
+# ...
 
 
 # What are the names and data types of the columns?
-
-
+# ...
