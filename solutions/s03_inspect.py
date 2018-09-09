@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # Inspecting a pandas DataFrame
+# # Inspect a pandas DataFrame
 
 # Import modules and read data
 import numpy as np

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # Selecting specific columns from a pandas DataFrame
+# # Select specific columns from a pandas DataFrame
 
 # Import modules and read games data
 import numpy as np

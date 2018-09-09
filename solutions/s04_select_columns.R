@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # Selecting specific columns from an R data frame using dplyr
+# # Select specific columns from an R data frame using dplyr
 
 # Load packages and read games data
 library(readr)

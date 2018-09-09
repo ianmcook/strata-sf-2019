@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # Inspecting an R data frame or tibble
+# # Inspect an R data frame or tibble
 
 # Load packages and read data
 library(readr)
