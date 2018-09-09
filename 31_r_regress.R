@@ -27,6 +27,7 @@
 library(readr)
 library(rpart)
 
+# Load data representing one brand of chess set ("set A")
 chess <- read_csv("data/chess/one_chess_set.csv")
 
 # View the data
