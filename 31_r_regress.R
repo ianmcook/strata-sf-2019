@@ -54,7 +54,7 @@ chess_test  <- chess[-indices, ]
 
 # R uses a formula notation to specify models. The 
 # formula for a simple model with one predictor variable
-# (x) and one response variable (y) is `y ~ x`
+# (`x`) and one response variable (`y`) is `y ~ x`
 model <- lm(
   weight ~ base_diameter,
   data = chess_train
