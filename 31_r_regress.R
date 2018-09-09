@@ -15,7 +15,7 @@
 # # R regression models
 
 # This example demonstrates a simple linear regression
-# modeling task, first using R's built-in `lm` function
+# modeling task, first using R's built-in `lm()` function
 # then using the `rpart()` function in the 
 # [rpart](https://cran.r-project.org/package=randomForest)
 # package.
