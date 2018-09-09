@@ -14,7 +14,7 @@
 
 # # Read data from a delimited text file into a pandas DataFrame
 
-# Load modules
+# Import modules
 # ...
 
 # Read data using the `read_table` function
