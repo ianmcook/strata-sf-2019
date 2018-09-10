@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # Selecting specific columns from a pandas DataFrame
+# # Select specific columns from a pandas DataFrame
 
 # Import modules and read games data
 import numpy as np
@@ -24,8 +24,9 @@ games
 # Use the DataFrame method `filter` method to return a 
 # DataFrame containing only some of the columns from the 
 # `games` DataFrame
-# ...
+games.filter(['name', 'min_players', 'max_players'])
 
 
 # Write the expression on multiple lines
-# ...
+games \
+  .filter(['name', 'min_players', 'max_players'])

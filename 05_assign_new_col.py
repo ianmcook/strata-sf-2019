@@ -26,21 +26,47 @@ games
 
 # The new column can contain a scalar value (repeated in 
 # every row):
-# ...
-
+games.assign(tax_percent = 0.08875)
 
 # Or, the new column can be calculated using an
 # expression that uses the values in other columns. To
 # do this, you need to reference the original DataFrame
 # or use a lambda:
-# ...
+games \
+  .assign(
+    list_price_with_tax = round(
+      games['list_price'] * 1.08875, 2
+    )
+  )
 
+games \
+  .assign(
+    list_price_with_tax = lambda x:
+      round(x['list_price'] * 1.08875, 2)
+  )
+  
 # The latter option is better for chaining
-
 
 # You can create multiple columns with one call to the
 # `assign` method
-# ...
+games \
+  .assign(
+    tax_percent = 0.08875,
+    list_price_with_tax = lambda x:
+      round(x['list_price'] * 1.08875, 2)
+  )
+
+# But you can't reference columns that you created in an
+# `assign` in other expressions later in the same 
+# `assign`; for that, use multiple `assign`s
+games \
+  .assign(
+    tax_percent = 0.08875
+  ) \
+  .assign(
+    list_price_with_tax = lambda x:
+      round(x['list_price'] * (1 + x['tax_percent']), 2)
+  )
 
 
 # Another option is to use the `eval` method. This uses
@@ -48,13 +74,27 @@ games
 # specify `inplace=False` when you use `eval`.
 games.eval('tax_percent = 0.08875', inplace=False)
 
-# But the `eval` method has a number of limitations
+# But the `eval` method has limitations. For example,
+# this fails:
+#```python
+# games \
+#   .eval('list_price_with_tax = round(list_price * 1.08875, 2)', inplace=False)
+#```
+
+# The workaround is:
+round = np.round
+games \
+  .eval('list_price_with_tax = list_price * 1.08875', inplace=False) \
+  .eval('list_price_with_tax = @round(list_price_with_tax, 2)', inplace=False)
 
 
 # To return a DataFrame with one or more columns renamed,
 # use the `rename` method. For the `columns` argument,
 # pass a dictionary in the form  `{'old_name':'new_name'}`
-# ...
+games.rename(columns = {'id':'game_id'})
+games.rename(
+  columns = {'id':'game_id', 'list_price':'price'}
+)
 
 # To remove columns, use the `drop` method, with `axis=1`
-# ...
+games.drop(['inventor', 'min_age'], axis=1)
