@@ -30,3 +30,8 @@ games.filter(['name', 'min_players', 'max_players'])
 # Write the expression on multiple lines
 games \
   .filter(['name', 'min_players', 'max_players'])
+
+# or
+
+(games
+  .filter(['name', 'min_players', 'max_players']))
