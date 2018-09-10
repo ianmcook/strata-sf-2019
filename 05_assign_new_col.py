@@ -78,6 +78,8 @@ games \
   )
 
 
+# ## Renaming columns
+  
 # To return a DataFrame with one or more columns renamed,
 # use the `rename` method. For the `columns` argument,
 # pass a dictionary in the form  `{'old_name':'new_name'}`
@@ -86,5 +88,9 @@ games.rename(
   columns = {'id':'game_id', 'list_price':'price'}
 )
 
-# To remove columns, use the `drop` method, with `axis=1`
+
+# ## Removing columns
+
+# To return a DataFrame with one or more columns removed,
+# use the `drop` method, with `axis=1`
 games.drop(['inventor', 'min_age'], axis=1)
