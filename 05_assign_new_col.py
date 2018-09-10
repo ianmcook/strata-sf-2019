@@ -34,14 +34,14 @@ games.assign(tax_percent = 0.08875)
 # or use a lambda:
 games \
   .assign(
-    list_price_with_tax = round(
+    price_with_tax = round(
       games.list_price * 1.08875, 2
     )
   )
 
 games \
   .assign(
-    list_price_with_tax = lambda x:
+    price_with_tax = lambda x:
       round(x.list_price * 1.08875, 2)
   )
 
@@ -61,7 +61,7 @@ games.assign(under_ten_dollars = games['list_price'] < 10)
 games \
   .assign(
     tax_percent = 0.08875,
-    list_price_with_tax = lambda x:
+    price_with_tax = lambda x:
       round(x.list_price * 1.08875, 2)
   )
 
@@ -73,28 +73,9 @@ games \
     tax_percent = 0.08875
   ) \
   .assign(
-    list_price_with_tax = lambda x:
+    price_with_tax = lambda x:
       round(x.list_price * (1 + x.tax_percent), 2)
   )
-
-
-# Another option is to use the `eval` method. This uses
-# a quoted string to specify the new columns. Always
-# specify `inplace=False` when you use `eval`.
-games.eval('tax_percent = 0.08875', inplace=False)
-
-# But the `eval` method has limitations. For example,
-# this fails:
-#```python
-# games \
-#   .eval('list_price_with_tax = round(list_price * 1.08875, 2)', inplace=False)
-#```
-
-# The workaround is:
-round = np.round
-games \
-  .eval('list_price_with_tax = list_price * 1.08875', inplace=False) \
-  .eval('list_price_with_tax = @round(list_price_with_tax, 2)', inplace=False)
 
 
 # To return a DataFrame with one or more columns renamed,
