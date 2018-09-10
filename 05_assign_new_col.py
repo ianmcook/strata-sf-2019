@@ -35,17 +35,26 @@ games.assign(tax_percent = 0.08875)
 games \
   .assign(
     list_price_with_tax = round(
-      games['list_price'] * 1.08875, 2
+      games.list_price * 1.08875, 2
     )
   )
 
 games \
   .assign(
     list_price_with_tax = lambda x:
-      round(x['list_price'] * 1.08875, 2)
+      round(x.list_price * 1.08875, 2)
   )
-  
+
 # The latter option is better for chaining
+
+# You can also use the quoted column name in square
+# brackets. This is less concise but safer, because 
+# Python can interpret the dot notation to refer to
+# an attribute or method of the DataFrame class
+# instead of a column of the DataFrame
+games.assign(under_ten_dollars = games.list_price < 10)
+games.assign(under_ten_dollars = games['list_price'] < 10)
+
 
 # You can create multiple columns with one call to the
 # `assign` method
@@ -53,7 +62,7 @@ games \
   .assign(
     tax_percent = 0.08875,
     list_price_with_tax = lambda x:
-      round(x['list_price'] * 1.08875, 2)
+      round(x.list_price * 1.08875, 2)
   )
 
 # But you can't reference columns that you created in an
@@ -65,7 +74,7 @@ games \
   ) \
   .assign(
     list_price_with_tax = lambda x:
-      round(x['list_price'] * (1 + x['tax_percent']), 2)
+      round(x.list_price * (1 + x.tax_percent), 2)
   )
 
 
