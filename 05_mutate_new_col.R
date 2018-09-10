@@ -20,6 +20,7 @@ library(dplyr)
 games <- read_csv("data/games/games.csv")
 games
 
+
 # Use the dplyr verb `mutate()` to return a data frame
 # with a new column added to it.
 
