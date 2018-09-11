@@ -29,5 +29,4 @@ nrow(games)
 # What are the names and data types of the columns?
 games # Read from top rows of tibble
 colnames(games)
-sapply(class, games)
-
+sapply(games, class)
