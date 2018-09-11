@@ -27,7 +27,7 @@ from pyspark.ml.regression import LinearRegression
 from pyspark.ml.evaluation import RegressionEvaluator
 from pyspark.ml.regression import RandomForestRegressor
 
-# Start a SparkSession
+# Start a Spark session
 spark = SparkSession.builder.master('local').getOrCreate()
 
 # Load the data
