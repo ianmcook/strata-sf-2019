@@ -21,7 +21,7 @@ games = pd.read_table('data/games/games.csv', sep=',')
 games
 
 
-# Use the DataFrame method `assign` method to return the
+# Use the DataFrame method `assign` to return the
 # dataframe with a new column added to it.
 
 # The new column can contain a scalar value (repeated in 

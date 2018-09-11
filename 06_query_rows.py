@@ -21,8 +21,8 @@ games = pd.read_table('data/games/games.csv', sep=',')
 games
 
 
-# Use the DataFrame method `query` method to return the
-# subset of rows that satisfy some conditions
+# Use the DataFrame method `query` to return the subset
+# of rows that satisfy some conditions
 
 # The argument to `query` is a quoted string containing
 # a Boolean expression. Bare column names can be used

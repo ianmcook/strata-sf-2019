@@ -21,9 +21,9 @@ games = pd.read_table('data/games/games.csv', sep=',')
 games
 
 
-# Use the DataFrame method `filter` method to return a 
-# DataFrame containing only some of the columns from the 
-# `games` DataFrame
+# Use the DataFrame method `filter` to return a DataFrame 
+# containing only some of the columns from the `games` 
+# DataFrame
 games.filter(['name', 'min_players', 'max_players'])
 
 
