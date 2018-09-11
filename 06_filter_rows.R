@@ -35,11 +35,16 @@ games %>% filter(max_players %>% between(5, 6))
 list_price <- 10.00
 games %>% filter(list_price <= !!list_price)
 
-
 # You can use symbolic logical operators like `&` and `|`
 # in `filter()`
 games %>% filter(list_price < 10 & max_players >= 6)
 
 # You can use other R operators and functions in `filter()`
 games %>% filter(name %in% c("Clue", "Risk"))
+games %>% filter(is.na(name))
+games %>% filter(name %>% startsWith("C"))
 games %>% filter(round(list_price, 0) == 20)
+
+# You can negate the truth of an expression using `!`:
+games %>% filter(!(name %in% c("Clue", "Risk")))
+games %>% filter(!is.na(name))

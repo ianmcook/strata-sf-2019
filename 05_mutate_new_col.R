@@ -27,8 +27,7 @@ games
 # The new column can contain a scalar value (repeated in 
 # every row) or it can be calculated using an
 # expression that uses the values in other columns
-games %>%
-  mutate(tax_percent = 0.08875)
+games %>% mutate(tax_percent = 0.08875)
 
 games %>% 
   mutate(
@@ -49,6 +48,16 @@ games %>%
   as.data.frame()
 
 
+# ## Replacing columns
+
+# You can replace existing columns the same way you make
+# new columns
+games %>% mutate(
+  name = toupper(name),
+  inventor = tolower(inventor)
+)
+
+
 # ## Renaming columns
 
 # To return a data frame with one or more columns renamed,
@@ -67,3 +76,16 @@ games %>%
 # the vector of columns to be removed
 games %>% 
   select(-c(inventor, min_age))
+
+
+# ## Replacing missing values
+
+# Load the inventory data (since the games data has no
+# missing values)
+inventory <- read_tsv('data/inventory/data.txt')
+inventory
+
+# Use the `ifelse()` and `is.na()` functions
+inventory %>%
+  mutate(price = ifelse(is.na(price), 0, price))
+

@@ -78,6 +78,17 @@ games \
   )
 
 
+# ## Replacing columns
+
+# You can replace existing columns the same way you make
+# new columns
+games. \
+  assign(
+    name = lambda x: x.name.str.upper(),
+    inventor = lambda x: x.inventor.str.lower()
+  )
+
+
 # ## Renaming columns
   
 # To return a DataFrame with one or more columns renamed,
@@ -94,3 +105,14 @@ games.rename(
 # To return a DataFrame with one or more columns removed,
 # use the `drop` method, with `axis=1`
 games.drop(['inventor', 'min_age'], axis=1)
+
+
+# ## Replacing missing values
+
+# Load the inventory data (since the games data has no
+# missing values)
+inventory = pd.read_table('data/inventory/data.txt')
+inventory
+
+# Use the `fillna` method
+inventory.assign(price = lambda x : x.price.fillna(9.00))

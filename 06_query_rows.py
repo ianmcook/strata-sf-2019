@@ -46,7 +46,8 @@ games.query('name.isin(["Clue", "Risk"])')
 games.query('name.isnull()')
 games.query('name.str.startswith("C")')
 
-# You can negate the truth of operation using `not` or `~`:
+# You can negate the truth of an expression using `not`
+# or `~`:
 games.query('not name.isin(["Clue", "Risk"])')
 games.query('~name.str.startswith("C")')
 
