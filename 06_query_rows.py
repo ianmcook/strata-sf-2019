@@ -43,6 +43,16 @@ games.query('list_price < 10 & max_players >= 6')
 # You can use some `pandas.Series` methods and some 
 # functions in the quoted string
 games.query('name.isin(["Clue", "Risk"])')
+games.query('name.isnull()')
+games.query('name.str.startswith("C")')
+
+# You can negate the truth of operation using `not` or `~`:
+games.query('not name.isin(["Clue", "Risk"])')
+games.query('~name.str.startswith("C")')
+
+# Some functions have negative versions
+games.query('name.notnull()')
+
 
 # To use an unsupported function, assign it to a variable
 # and use `@` before the variable name in the expression
