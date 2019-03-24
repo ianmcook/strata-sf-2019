@@ -135,3 +135,15 @@ inventory
 
 # Use the `fillna` method
 inventory.assign(price = lambda x : x.price.fillna(9.00))
+
+
+# ## Iterating over rows
+
+# You can call the `apply` method of a column (which is
+# a pandas Series object) to iterate over the rows of a
+# DataFrame in `assign`
+games.assign(
+  name = lambda x: x.name.apply(
+    lambda y: 'Cluedo' if y == 'Clue' else y
+  )
+)
