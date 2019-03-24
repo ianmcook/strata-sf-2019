@@ -59,3 +59,16 @@ games.query('name.notnull()')
 # and use `@` before the variable name in the expression
 round = np.round
 games.query('@round(list_price, 0) == 20')
+
+
+# Alternatively, use the `.loc` indexer. To do this,
+# you need to reference the original DataFrame or use
+# a lambda
+games.loc[games.min_age < 5, :]
+games.loc[games.max_players.between(5,6), :]
+
+games.loc[lambda x: x.min_age < 5, :]
+games.loc[lambda x: x.max_players.between(5,6), :]
+games.loc[lambda x: (x.list_price < 10) & (x.max_players >= 6), :]
+games.loc[lambda x: ~x.name.isin(["Clue", "Risk"]), :]
+games.loc[lambda x: ~x.name.str.startswith("C"), :]
