@@ -89,3 +89,13 @@ inventory
 inventory %>%
   mutate(price = ifelse(is.na(price), 0, price))
 
+
+# ## Iterating over rows
+
+# You can call vectorized R functions in `mutate()` and
+# in other dplyr verbs to iterate over the rows of a 
+# data frame
+games %>%
+  mutate(
+    name = ifelse(name == "Clue", "Cluedo", name)
+  )
