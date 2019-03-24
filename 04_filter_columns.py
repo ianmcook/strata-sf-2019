@@ -35,3 +35,8 @@ games \
 
 (games
   .filter(['name', 'min_players', 'max_players']))
+
+
+# Alternatively, use the `.loc` indexer:
+games \
+  .loc[:, ['name', 'min_players', 'max_players']]
