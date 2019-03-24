@@ -77,6 +77,25 @@ games \
       np.round(x.list_price * (1 + x.tax_percent), 2)
   )
 
+# Alternatively, use the DataFrame method `eval`, which
+# evaluates a string describing operations on DataFrame
+# columns. Specify `inplace=False` to ensure that pandas
+# does not mutate the existing DataFrame in place 
+games.eval(
+  'price_with_tax = list_price * 1.08875',
+  inplace=False
+)
+
+# However, many operations are not supported by `eval`.
+# This code fails with the error `"round" is not a 
+# supported function`
+#```python
+#games.eval(
+#  'price_with_tax = round(list_price * 1.08875, 2)',
+#  inplace=False
+#)
+#```
+
 
 # ## Replacing columns
 
