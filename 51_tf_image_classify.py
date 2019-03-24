@@ -55,7 +55,7 @@ for path, label in zip(x, y):
 
 # Split the paths and labels into 80% training, 20% test
 train_frac = 0.8
-train_n = math.floor(train_frac * len(x))
+train_n = int(math.floor(train_frac * len(x)))
 indices = list(range(0, len(x)))
 random.shuffle(indices)
 train_indices = indices[0:train_n]
