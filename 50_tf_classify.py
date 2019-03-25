@@ -106,7 +106,7 @@ my_feature_columns = [
 
 model = tf.estimator.DNNClassifier(
     feature_columns=my_feature_columns,
-    hidden_units=[20, 20], # 2 hidden layers with 10 nodes each
+    hidden_units=[10, 10], # 2 hidden layers with 10 nodes each
     label_vocabulary=chess_pieces,
     n_classes=6 # len(chess_pieces)
 )
