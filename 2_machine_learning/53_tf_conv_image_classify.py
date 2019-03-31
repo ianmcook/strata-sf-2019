@@ -12,20 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# # TensorFlow DNNClassifier for image classification
+# # TensorFlow convolutional neural network for image classification
 
-# This example applies TensorFlow's
-# [`DNNClassifier`](https://www.tensorflow.org/api_docs/python/tf/estimator/DNNClassifier)
-# pre-made estimator to a simple image classification 
+# This example applies the estimator defined in the
+# file `cnnmodel.py` to a simple image classification 
 # task.
-
 
 # ## Preparation
 
 # Import the required modules
-import os, random, math
+import os, random, math, subprocess
 import tensorflow as tf
 from IPython.display import Image, display
+
+# Import the function `cnn_model_fn` from the file 
+# `cnnmodel.py` in the directory `2_machine_learning`
+import sys
+sys.path.append('2_machine_learning')
+from cnnmodel import cnn_model_fn
 
 # Specify the unique labels (names of the chess pieces)
 chess_pieces = ['King', 'Queen', 'Rook', 'Bishop', 'Knight', 'Pawn']
@@ -39,15 +43,16 @@ img_root = 'data/chess/images'
 
 # There are images of pieces from four different chess
 # sets (A, B, C, and D); specify which one use
-chess_set = 'A'
+chess_sets = ['A','B','C','D']
 
 # Fill the empty lists with the file paths and labels
-for chess_piece in chess_pieces:
-  img_dir = img_root + '/' + chess_set + '/' + chess_piece + '/'
-  img_paths = [img_dir + d for d in os.listdir(img_dir)]
-  img_labels = [chess_piece] * len(img_paths)
-  x.extend(img_paths)
-  y.extend(img_labels)
+for chess_set in chess_sets:
+  for chess_piece in chess_pieces:
+    img_dir = img_root + '/' + chess_set + '/' + chess_piece + '/'
+    img_paths = [img_dir + d for d in os.listdir(img_dir)]
+    img_labels = [chess_piece] * len(img_paths)
+    x.extend(img_paths)
+    y.extend(img_labels)
 
 # View the image file paths and labels
 for path, label in zip(x, y):
@@ -65,12 +70,21 @@ train_y = [y[i] for i in train_indices]
 test_x = [x[i] for i in test_indices]
 test_y = [y[i] for i in test_indices]
 
+# Encode the labels by transforming the names of the
+# chess pieces to numeric codes. This is required
+# because the estimator implemented in `cnn_model_fn`
+# cannot accept a label vocabulary.
+from sklearn.preprocessing import LabelEncoder
+encoder = LabelEncoder()
+train_y_encoded = encoder.fit_transform(train_y)
+test_y_encoded = encoder.transform(test_y)
+
 
 # ## TensorFlow setup
 
 # Set constants for TensorFlow
 BATCH_SIZE = 100
-TRAIN_STEPS = 300
+TRAIN_STEPS = 500
 
 # Define a function that reads an image from a file,
 # decodes it to numbers, and returns a two-element tuple 
@@ -85,13 +99,13 @@ def _parse_function(path, label):
 
 # These functions apply `_parse_function`
 def train_input_fn():
-  dataset = tf.data.Dataset.from_tensor_slices((train_x, train_y))
+  dataset = tf.data.Dataset.from_tensor_slices((train_x, train_y_encoded))
   dataset = dataset.map(_parse_function)
   dataset = dataset.shuffle(len(train_x)).repeat().batch(BATCH_SIZE)
   return dataset
 
 def test_input_fn():
-  dataset = tf.data.Dataset.from_tensor_slices((test_x, test_y))
+  dataset = tf.data.Dataset.from_tensor_slices((test_x, test_y_encoded))
   dataset = dataset.map(_parse_function)
   dataset = dataset.batch(BATCH_SIZE)
   return dataset
@@ -104,22 +118,13 @@ my_feature_columns = [
   tf.feature_column.numeric_column('image', shape=[128, 128])
 ]
 
-# Instantiate a `DNNClassifier` estimator
-
-# In this example, the [optimizer](https://www.tensorflow.org/api_guides/python/train#Optimizers) 
-# used to train the model is specified, because the default
-# Adagrad optimizer yielded a model with poor accuracy.
-# The optimizer's learning rate is also specified, because
-# the default value of 0.001 caused the algorithm to
-# converge to a local minimum.
-model = tf.estimator.DNNClassifier(
-    feature_columns=my_feature_columns,
-    hidden_units=[1024, 128],
-    optimizer=tf.train.AdamOptimizer(
-      learning_rate=0.0001
-    ),
-    label_vocabulary=chess_pieces,
-    n_classes=6
+# Instantiate the estimator, specifying the 
+# model to use and the feature columns
+model = tf.estimator.Estimator(
+  model_fn=cnn_model_fn,
+  params={
+      'feature_columns': my_feature_columns,
+  }
 )
 
 
@@ -177,8 +182,8 @@ predictions = model.predict(
 # Print the predictions and display the images
 template = ('\n\n\n\nPrediction is "{}" ({:.1f}%) from image:"')
 for (prediction, image) in zip(predictions, pred_x):
-    class_name = prediction['classes'][0].decode()
-    class_id = prediction['class_ids'][0]
+    class_id = prediction['classes']
+    class_name = encoder.inverse_transform([class_id])[0]
     probability = prediction['probabilities'][class_id]
     print(
       template.format(
@@ -187,63 +192,3 @@ for (prediction, image) in zip(predictions, pred_x):
       )
     )
     display(Image(image))
-
-
-# ## Exercises
-
-# 1. This code trains the model using only images of
-#    pieces from chess set A. The resulting trained 
-#    model is poor at generalizing to images of pieces
-#    from other chess sets. Modify the code in the
-#    **Preparation** section to train the model using
-#    the images of pieces from all four sets (A, B, 
-#    C, and D). How does this affect the accuracy
-#    of the model on the test (evaluation) set?
-#
-# 2. In the **TensorFlow setup** section and the
-#    **Specifying the model** section, modify 
-#    `BATCH_SIZE`, `TRAIN_STEPS`, the number of
-#    hidden layers, and the number of nodes in the
-#    hidden layers to try to improve the accuracy of
-#    the model.
-#
-# 3. After making these changes, does the model do 
-#    a better job of generating predictions on the
-#    unlabeled images?
-#
-# 4. Modify the code in the **Making predictions**
-#    section to use images from the `weird` directory
-#    instead of the `unknown` directory. How well
-#    does the model predict on these images?
-
-
-# ## Next steps
-
-# Dense neural networks (with all layers fully connected)
-# are not well-suited to image classification tasks except
-# in relatively simple cases like this one. Predictions 
-# are sensitive to the size and position of the objects 
-# in the image; they cannot robustly generalize.
-
-# Accuracy can be improved by increasing the number of
-# hidden layers and nodes, increasing the number of
-# training steps, and using larger amounts of more
-# diverse training data, but this is inefficient.
-
-# Convolutional neural networks (CNNs) provide a solution.
-# In addition to dense (fully connected) layers, they use
-# - Convolutional layers (for filtering and weighting)
-# - Pooling layers (for downsampling)
-
-# These types of layers allow DNNs to differentiate between
-# images based on subregions, and efficiently learn what
-# visual features are most important for predicting labels.
-
-# TensorFlow does not provide pre-made estimators for CNNs
-# but you can use the Estimator API to build your own.
-# The next example demonstrates how to do this.
-
-# Alternatively, you could build a CNN for image 
-# classification using TensorFlow's 
-# [Keras API](https://www.tensorflow.org/guide/keras)
-# which offers a higher level of abstraction.
